@@ -1,0 +1,12 @@
+{
+  "name": "ai-template-cc-typescript",
+  "version": "1.0.0",
+  "description": "A template for creating TS projects with Claude Code",
+  "license": "MIT",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "build": "echo 'building...'",
+    "test": "echo 'testing...'",
+    "test:coverage": "testing with coverage..."
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "statusLine": {
+        "type": "command",
+        "command": "bun .claude/status_lines/status_line.ts",
+        "padding": 0
+    }
+}

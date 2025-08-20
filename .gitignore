@@ -1,0 +1,47 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Packages
+node_modules
+
+# Build results
+dist/
+build/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Editor directories and files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.sln
+
+# Optional caches
+.eslintcache
+.stylelintcache
+.vs/
+
+# environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+settings.local.json
+
+# macOS
+.DS_Store
+
