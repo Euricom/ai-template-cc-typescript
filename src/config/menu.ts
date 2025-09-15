@@ -24,10 +24,6 @@ export const mainMenu: MenuType = [
         title: "Product Page",
         url: "/pages/products",
       },
-      {
-        title: "Tasks",
-        url: "/pages/tasks",
-      }
     ],
   },
   {

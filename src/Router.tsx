@@ -3,7 +3,6 @@ import { AppLayout } from "./components/app-layout";
 import NotMatch from "./pages/NotMatch";
 import Dashboard from "./pages/Dashboard";
 import ProductsPage from "./pages/products/Page";
-import TasksPage from "./pages/tasks/Page";
 
 export default function Router() {
   return (
@@ -12,7 +11,6 @@ export default function Router() {
         <Route path="" element={<Dashboard />} />
         <Route path="pages">
           <Route path="products" element={<ProductsPage />} />
-          <Route path="tasks" element={<TasksPage />} />
         </Route>
         <Route path="*" element={<NotMatch />} />
       </Route>
