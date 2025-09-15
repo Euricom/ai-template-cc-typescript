@@ -1,70 +1,131 @@
-# README.md - Claude Code Template Project
+# AI Template - TypeScript React Project
 
-A modern project structure optimized for efficient AI-assisted development using Claude Code.
+A modern React TypeScript project template optimized for AI-assisted development using Claude Code.
 
 ## Overview
 
-This repository provides a standardized structure for AI-enhanced software development workflows. Rather than directly inputting commands, documentation, and feature requests into the CLI of Claude Code, this structure offers a more organized, version-controlled, and collaborative approach to working with AI coding assistants.
+This is a full-featured React application built with modern tooling including Vite, TypeScript, TailwindCSS, and React Query. The project structure is optimized for AI-enhanced development workflows with Claude Code, providing organized documentation, commands, and specifications for efficient collaboration with AI coding assistants.
 
-## Directory Structure
+## Tech Stack
+
+- **Framework**: React 19 with TypeScript
+- **Build Tool**: Vite 6
+- **Styling**: TailwindCSS 4 with CSS animations
+- **UI Components**: Radix UI primitives with custom design system
+- **State Management**: TanStack React Query for server state
+- **Routing**: React Router 7
+- **Theme**: next-themes for dark/light mode
+- **Notifications**: Sonner for toast notifications
+- **HTTP Client**: ofetch for API calls
+- **Schema Validation**: Zod
+- **Package Manager**: pnpm
+
+## Project Structure
 
 ```
 {root}/
 ├── .claude/
 │   ├── commands/       # Custom Claude Code command definitions
-│   |    ├── COMMANDS.md # Documentation for commands system
-|   |    ├── prime.md.   # Context initialization command
-│   |    └── ...
-|   └── settings.local.json  # local settings (permissions, ...)
+│   ├── agents/         # AI agent configurations
+│   ├── hooks/          # Development lifecycle hooks
+│   └── settings.json   # Claude Code settings
 ├── ai_docs/            # AI-specific documentation
-│   ├── AI_DOCS.md      # Documentation for AI docs system
-│   └── ...
+│   ├── architecture.md # System architecture docs
+│   ├── design_patterns.md # Code patterns and conventions
+│   └── domain_concepts.md # Business domain knowledge
 ├── specs/              # Feature specifications
-│   ├── SPECS.md        # Documentation for specs system
-│   └── ...
-└── README.md           
+├── src/
+│   ├── api/           # API layer with type-safe clients
+│   ├── components/    # Reusable UI components
+│   ├── contexts/      # React contexts (Theme, etc.)
+│   ├── hooks/         # Custom React hooks
+│   ├── lib/           # Utility functions
+│   ├── pages/         # Route components
+│   ├── App.tsx        # Root application component
+│   └── main.tsx       # Application entry point
+├── package.json
+└── vite.config.ts
 ```
 
-## Key Components
+## Development
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended package manager)
+
+### Getting Started
+
+1. **Install dependencies**:
+   ```bash
+   pnpm install
+   ```
+
+2. **Start development server**:
+   ```bash
+   pnpm dev
+   ```
+
+3. **Build for production**:
+   ```bash
+   pnpm build
+   ```
+
+### Available Scripts
+
+```bash
+# Development
+pnpm dev              # Start Vite dev server
+pnpm build            # Build for production
+pnpm preview          # Preview production build
+
+# Code Quality
+pnpm lint             # Run ESLint
+pnpm test             # Run tests
+pnpm test:coverage    # Run tests with coverage
+
+# Development Tools
+pnpm type-check       # TypeScript type checking
+```
+
+## AI-Enhanced Development
+
+This template is specifically designed for efficient collaboration with Claude Code through:
 
 ### 1. Claude Commands (`.claude/commands/`)
 
-Custom reusable commands that streamline interactions with Claude Code:
+Custom reusable commands that streamline AI interactions:
 
-- **Project Context Initialization**: The `prime.md` command quickly primes Claude with project structure and important documentation
-- **Standardized Workflows**: Create commands for code generation, testing, analysis, and more
-- **Invocation Syntax**: Use `/project:command_name` to execute commands
+- **Project Context**: Commands to quickly prime Claude with project structure
+- **Code Generation**: Standardized workflows for component creation
+- **Quality Assurance**: Automated testing and linting workflows
+- **Invocation**: Use `/command_name` in Claude Code
 
 ### 2. AI Documentation (`ai_docs/`)
 
-Specialized documentation that enhances AI models' understanding of your project:
+Specialized documentation to enhance AI understanding:
 
-- **Domain-Specific Knowledge**: Terminology, architecture, and design patterns
-- **Implementation Details**: System relationships and code examples
-- **Enhanced Generation**: Helps Claude generate code aligned with your project's patterns
-- **Invocation Syntax**: Use `@[path/to/document]` to reference docs in conversations
+- **Architecture**: System design and component relationships
+- **Design Patterns**: Established code patterns and conventions
+- **Domain Concepts**: Business logic and terminology
+- **Reference**: Use `@[ai_docs/filename]` in conversations
 
 ### 3. Feature Specifications (`specs/`)
 
 Structured specifications for planned features:
 
-- **Implementation Blueprint**: Detailed specs for types, methods, tests, and validation
-- **Consistent Design**: Standardized format ensures all necessary details are included
-- **AI-Ready Format**: Optimized for consumption by Claude Code
-- **Invocation Syntax**: Use `@[path/to/spec.md]` to reference in conversations
+- **Implementation Blueprints**: Detailed specs for types, methods, and tests
+- **Consistency**: Standardized format ensures complete specifications
+- **AI Integration**: Optimized for consumption by Claude Code
+- **Reference**: Use `@[specs/filename]` in conversations
 
-## Using the Prime Command
+## Environment Configuration
 
-The `prime.md` command fills Claude's context window with essential project information:
+Create a `.env.local` file for local environment variables:
 
-1. Run `/project:prime` in Claude Code
-2. Claude will:
-   - Display the project structure
-   - Read key documentation files
-   - Build a comprehensive understanding of the project
-
-This allows Claude to provide more accurate assistance with your project.
-
-
-
+```bash
+VITE_APP_NAME="Your App Name"
+VITE_API_BASE_URL="http://localhost:3001"
+VITE_USE_HASH_ROUTE="false"
+```
 

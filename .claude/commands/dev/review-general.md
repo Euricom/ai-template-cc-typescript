@@ -104,7 +104,6 @@ npx tsc --noEmit --listFiles
 pnpm run build && du -sh dist/
 
 # Code quality metrics
-rg --stats "client:" --type astro
 rg --stats "export interface" --type ts
 rg --stats "import type" --type ts
 

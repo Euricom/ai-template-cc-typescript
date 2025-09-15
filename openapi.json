@@ -1,0 +1,798 @@
+{
+  "info": {
+    "title": "Euricom Test API - V2",
+    "version": "2.1.0",
+    "description": "\n<a href=\"/api/v1/swagger.json\">/api/v1/swagger.json</a>\n        ",
+    "contact": {
+      "name": "Euricom",
+      "url": "https://euri.com",
+      "email": "peter.cosemans@euri.com"
+    },
+    "license": { "name": "MIT", "url": "https://opensource.org/licenses/MIT" }
+  },
+  "openapi": "3.0.0",
+  "components": {
+    "schemas": {
+      "basket": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "number" },
+            "productId": { "type": "number" },
+            "quantity": { "type": "number" }
+          },
+          "required": ["id", "productId", "quantity"]
+        }
+      },
+      "product": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "sku": { "type": "string" },
+          "title": { "type": "string" },
+          "stocked": { "type": "boolean" },
+          "price": { "type": "number" },
+          "desc": { "type": "string" },
+          "image": { "type": "string" },
+          "basePrice": { "type": "number" },
+          "createdAt": { "type": "string" },
+          "updatedAt": { "type": "string" }
+        },
+        "required": [
+          "id",
+          "sku",
+          "title",
+          "stocked",
+          "price",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "productUpdate": {
+        "type": "object",
+        "properties": {
+          "sku": { "type": "string" },
+          "title": { "type": "string" },
+          "stocked": { "type": "boolean" },
+          "price": { "type": "number" },
+          "desc": { "type": "string" },
+          "image": { "type": "string" },
+          "basePrice": { "type": "number" },
+          "updatedAt": { "type": "string" }
+        }
+      },
+      "productList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/product" }
+          },
+          "total": { "type": "number" },
+          "page": { "type": "number" },
+          "pageSize": { "type": "number" }
+        },
+        "required": ["items", "total", "page", "pageSize"]
+      },
+      "productCreate": {
+        "type": "object",
+        "properties": {
+          "sku": { "type": "string" },
+          "title": { "type": "string" },
+          "stocked": { "type": "boolean" },
+          "price": { "type": "number" },
+          "desc": { "type": "string" },
+          "image": { "type": "string" },
+          "basePrice": { "type": "number" }
+        },
+        "required": ["sku", "title", "stocked", "price"]
+      },
+      "task": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "desc": { "type": "string" },
+          "completed": { "type": "boolean" }
+        },
+        "required": ["id", "desc", "completed"]
+      },
+      "taskUpdate": {
+        "type": "object",
+        "properties": {
+          "desc": { "type": "string" },
+          "completed": { "type": "boolean" }
+        }
+      },
+      "taskCreate": {
+        "type": "object",
+        "properties": {
+          "desc": { "type": "string" },
+          "completed": { "type": "boolean" }
+        },
+        "required": ["desc", "completed"]
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number" },
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "age": { "type": "number", "minimum": 18, "maximum": 80 },
+          "email": { "type": "string", "format": "email" },
+          "image": { "type": "string" },
+          "phone": { "type": "string" },
+          "company": { "type": "string" },
+          "createdAt": { "type": "string" },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": { "type": "string" },
+              "city": { "type": "string" },
+              "zip": { "type": "string" }
+            },
+            "required": ["street", "city", "zip"]
+          }
+        },
+        "required": [
+          "id",
+          "firstName",
+          "lastName",
+          "age",
+          "email",
+          "image",
+          "phone",
+          "company",
+          "createdAt",
+          "address"
+        ]
+      },
+      "userUpdate": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "age": { "type": "number", "minimum": 18, "maximum": 80 },
+          "email": { "type": "string", "format": "email" },
+          "image": { "type": "string" },
+          "phone": { "type": "string" },
+          "company": { "type": "string" },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": { "type": "string" },
+              "city": { "type": "string" },
+              "zip": { "type": "string" }
+            },
+            "required": ["street", "city", "zip"]
+          }
+        }
+      },
+      "userList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/user" }
+          },
+          "total": { "type": "number" },
+          "page": { "type": "number" },
+          "pageSize": { "type": "number" }
+        },
+        "required": ["items", "total", "page", "pageSize"]
+      },
+      "userCreate": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "age": { "type": "number", "minimum": 18, "maximum": 80 },
+          "email": { "type": "string", "format": "email" },
+          "image": { "type": "string" },
+          "phone": { "type": "string" },
+          "company": { "type": "string" },
+          "address": {
+            "type": "object",
+            "properties": {
+              "street": { "type": "string" },
+              "city": { "type": "string" },
+              "zip": { "type": "string" }
+            },
+            "required": ["street", "city", "zip"]
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "age",
+          "email",
+          "image",
+          "phone",
+          "company",
+          "address"
+        ]
+      }
+    },
+    "parameters": {}
+  },
+  "paths": {
+    "/api/v1/basket/{key}/products/{productId}": {
+      "post": {
+        "description": "Add a product on the basket",
+        "tags": ["basket"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "schema": {
+              "type": "string",
+              "description": "The id of the product to add"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "schema": { "type": "string", "description": "The basket key" },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": { "quantity": { "type": "number" } },
+                "required": ["quantity"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/basket" }
+              }
+            }
+          },
+          "404": { "description": "NOT_FOUND" },
+          "409": { "description": "CONFLICT" }
+        }
+      },
+      "patch": {
+        "description": "Update the quantity of a product",
+        "tags": ["basket"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "schema": {
+              "type": "string",
+              "description": "The id of the product to remove"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "schema": { "type": "string", "description": "The basket key" },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": { "quantity": { "type": "number" } },
+                "required": ["quantity"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/basket" }
+              }
+            }
+          },
+          "404": { "description": "NOT_FOUND" },
+          "409": { "description": "CONFLICT" }
+        }
+      },
+      "delete": {
+        "description": "Remove product from basket",
+        "tags": ["basket"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "productId",
+            "schema": {
+              "type": "string",
+              "description": "The id of the product to remove"
+            },
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "schema": { "type": "string", "description": "The basket key" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/basket" }
+              }
+            }
+          },
+          "404": { "description": "NOT_FOUND" }
+        }
+      }
+    },
+    "/api/v1/basket/{key}": {
+      "get": {
+        "description": "Gets all basket items",
+        "tags": ["basket"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/basket" }
+              }
+            }
+          },
+          "404": { "description": "NOT_FOUND" }
+        }
+      },
+      "delete": {
+        "description": "Clear the basket",
+        "tags": ["basket"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key",
+            "schema": { "type": "string" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/basket" }
+              }
+            }
+          },
+          "404": { "description": "NOT_FOUND" }
+        }
+      }
+    },
+    "/api/v1/products/{id}": {
+      "put": {
+        "tags": ["products"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/productUpdate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/product" }
+              }
+            }
+          },
+          "400": { "description": "BAD_REQUEST" },
+          "404": { "description": "NOT_FOUND" }
+        }
+      },
+      "delete": {
+        "tags": ["products"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/product" }
+              }
+            }
+          },
+          "204": { "description": "NO_CONTENT" }
+        }
+      },
+      "get": {
+        "tags": ["products"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/product" }
+              }
+            }
+          },
+          "404": { "description": "NO_FOUND" }
+        }
+      }
+    },
+    "/api/v1/products": {
+      "get": {
+        "tags": ["products"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": { "type": "number", "nullable": true },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "schema": { "type": "number", "nullable": true },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": { "type": "string" },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "schema": { "type": "string" },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/productList" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/productCreate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/product" }
+              }
+            }
+          },
+          "400": { "description": "BAD_REQUEST" }
+        }
+      }
+    },
+    "/api/v1/system": {
+      "delete": {
+        "tags": ["system"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "users",
+            "schema": { "type": "number", "nullable": true },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "products",
+            "schema": { "type": "number", "nullable": true },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "tasks",
+            "schema": { "type": "number", "nullable": true },
+            "required": false
+          }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/api/v1/tasks/{id}": {
+      "put": {
+        "tags": ["tasks"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/taskUpdate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/task" }
+              }
+            }
+          },
+          "400": { "description": "BAD_REQUEST" },
+          "404": { "description": "NOT_FOUND" }
+        }
+      },
+      "delete": {
+        "tags": ["tasks"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/task" }
+              }
+            }
+          },
+          "404": { "description": "NOT_FOUND" }
+        }
+      },
+      "get": {
+        "tags": ["tasks"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/task" }
+              }
+            }
+          },
+          "404": { "description": "NOT_FOUND" }
+        }
+      }
+    },
+    "/api/v1/tasks": {
+      "get": {
+        "tags": ["tasks"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/task" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["tasks"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/taskCreate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/task" }
+              }
+            }
+          },
+          "400": { "description": "BAD_REQUEST" }
+        }
+      }
+    },
+    "/api/v1/users/{id}": {
+      "put": {
+        "tags": ["users"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/userUpdate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/user" }
+              }
+            }
+          },
+          "400": { "description": "BAD_REQUEST" },
+          "404": { "description": "NOT_FOUND" }
+        }
+      },
+      "delete": {
+        "tags": ["users"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/user" }
+              }
+            }
+          },
+          "201": { "description": "NO_CONTENT" }
+        }
+      },
+      "get": {
+        "tags": ["users"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": { "type": "number" },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/user" }
+              }
+            }
+          },
+          "404": { "description": "NO_FOUND" }
+        }
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "tags": ["users"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": { "type": "number", "nullable": true },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "pageSize",
+            "schema": { "type": "number", "nullable": true },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": { "type": "string" },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/userList" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/userCreate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/user" }
+              }
+            }
+          },
+          "400": { "description": "BAD_REQUEST" }
+        }
+      }
+    }
+  }
+}
